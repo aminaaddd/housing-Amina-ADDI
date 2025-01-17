@@ -1,0 +1,32 @@
+
+services:
+  house-api:
+    image: amina444/house
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_APP=api.py
+      - SQLALCHEMY_DATABASE_URI=postgresql://amina:23012006@db:5432/housing_db
+
+    depends_on:
+      - db
+    networks:
+      - mynetwork
+
+  db:
+    image: amina444/postgres:latest
+    environment:
+      POSTGRES_USER: amina
+      POSTGRES_PASSWORD: 23012006
+      POSTGRES_DB: housing_db
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - mynetwork
+
+volumes:
+  pgdata:
+
+networks:
+  mynetwork:
+    driver: bridge
