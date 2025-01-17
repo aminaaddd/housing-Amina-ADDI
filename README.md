@@ -8,8 +8,12 @@ Docker installed on your system (Install Docker).
 Docker Compose installed (Install Docker Compose).
 
 ## Setup Instructions
+```bash
 git clone https://github.com/aminaaddd/housing-Amina-ADDI.git
+```
+```bash
 docker-compose up --build
+```
 
 ## Pull images
 * https://hub.docker.com/repository/docker/amina444/postgres  # postgresql image
