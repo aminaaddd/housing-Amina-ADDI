@@ -13,6 +13,9 @@ Docker Compose installed.
 git clone https://github.com/aminaaddd/housing-Amina-ADDI.git
 ```
 ```bash
+cd housing-Amina-ADDI
+```
+```bash
 docker-compose up --build
 ```
 
@@ -21,6 +24,9 @@ docker-compose up --build
 * https://hub.docker.com/repository/docker/amina444/house     # api image
 
 ## Migration
+```bash
+cd app
+```
 ```bash
 rm -rf migrations                                             # if migrations directory exists
 ```
