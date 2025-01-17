@@ -20,21 +20,36 @@ docker-compose up --build
 * https://hub.docker.com/repository/docker/amina444/house     # api image
 
 ## Migration
+```bash
 rm -rf migrations                                             # if migrations directory exists
+```
+```bash
 docker exec -it venv-db-1 psql -U amina -d housing_db
-  > DROP TABLE IF EXISTS alembic_version;                     # if the table exists
+```
+```bash
+   DROP TABLE IF EXISTS alembic_version;                     # if the table exists
+```
 
 ## Create migrations
+```bash
 docker exec -it venv-house-api-1 /bin/bash
-  > flask db init
-  > flask db migrate -m "Create houses table"
-  > flask db upgrade
+```
+```bash
+  flask db init
+  flask db migrate -m "Create houses table"
+  flask db upgrade
+```
 
 ## Show the database
+```bash
 docker exec -it venv-db-1 psql -U amina -d housing_db
-	> \dt
+```
+```bash
+\dt
+```
 
 ## Test
+```bash
 curl -X POST http://localhost:5000/houses \
 -H "Content-Type: application/json" \
 -d '{
@@ -49,6 +64,7 @@ curl -X POST http://localhost:5000/houses \
   "median_house_value": 452600.0,
   "ocean_proximity": "NEAR BAY"
 }'
+```
 
 ## To check
 * http://localhost:5000/houses
