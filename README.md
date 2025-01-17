@@ -4,7 +4,7 @@ RESTful API built with Flask.
 Follow these steps to set up and run the project on your local machine.
 
 ## Prerequisites
-Docker installed on your system (* https://docs.docker.com/get-started/introduction/get-docker-desktop/).
+Docker installed on your system - https://docs.docker.com/get-started/introduction/get-docker-desktop/.
 
 Docker Compose installed (Install Docker Compose).
 
