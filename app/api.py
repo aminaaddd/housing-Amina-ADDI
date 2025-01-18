@@ -5,7 +5,7 @@ from flask_migrate import Migrate
 # Initialize Flask app
 app = Flask(__name__)
 
-# Database configuration (update with your PostgreSQL details)
+# Database configuration 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://amina:23012006@db:5432/housing_db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -27,7 +27,7 @@ class House(db.Model):
     median_house_value = db.Column(db.Float, nullable=False)
     ocean_proximity = db.Column(db.String(100), nullable=False)
 
-# API Routes
+# API Routes (Get and Post)
 @app.route("/houses", methods=["GET", "POST"])
 def houses():
     if request.method == "GET":
