@@ -67,8 +67,8 @@ docker exec -it venv-db-1 psql -U amina -d housing_db
 \dt
 ```
 
-['!WARNING']
-The names of containers in my machine could not be the same at your machine.
+> [!WARNING] 
+> The names of containers in my machine could not be the same at your machine.
 
 ## Test
 ```bash
