@@ -37,7 +37,15 @@ docker exec -it venv-db-1 psql -U amina -d housing_db
    DROP TABLE IF EXISTS alembic_version;                     # if the table exists
 ```
 
+## To see the names of containers
+```bash
+docker ps
+```
 ## Create migrations
+```bash
+docker exec -it name-api-container /bin/bash
+```
+In my machine:
 ```bash
 docker exec -it venv-house-api-1 /bin/bash
 ```
@@ -49,11 +57,18 @@ docker exec -it venv-house-api-1 /bin/bash
 
 ## Show the database
 ```bash
+docker exec -it name-db-container psql -U amina -d housing_db
+```
+In my machine:
+```bash
 docker exec -it venv-db-1 psql -U amina -d housing_db
 ```
 ```bash
 \dt
 ```
+
+['!WARNING']
+The names of containers in my machine could not be the same at your machine.
 
 ## Test
 ```bash
