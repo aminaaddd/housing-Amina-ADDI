@@ -5,17 +5,17 @@ from flask_migrate import Migrate
 # Initialize Flask app
 app = Flask(__name__)
 
-# Database configuration (update with your PostgreSQL details)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://amina:23012006@db:5432/housing_db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+# Database configuration
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://amina:23012006@db:5432/housing_db' # to interact with db, it translates the model House into a table in db
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False # To manage db changes
 
 # Initialize database and migration tools
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
 # Define the House model
-class House(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+class House(db.Model): # House table
+    id = db.Column(db.Integer, primary_key=True) # Primary key
     longitude = db.Column(db.Float, nullable=False)
     latitude = db.Column(db.Float, nullable=False)
     housing_median_age = db.Column(db.Integer, nullable=False)
@@ -54,7 +54,7 @@ with app.app_context(): # create the table if it does not exist
 
 @app.route("/houses", methods=["POST"])
 def create_houses():
-    # Add a new house to the database
+    # Get the data from the request body
     data = request.json
     new_house = House(
         longitude=data['longitude'],
@@ -68,8 +68,8 @@ def create_houses():
         median_house_value=data['median_house_value'],
         ocean_proximity=data['ocean_proximity'] 
     )
-    db.session.add(new_house)
-    db.session.commit()
+    db.session.add(new_house) # Add new house to db
+    db.session.commit() # Save changes
     return jsonify({"message": "House added successfully"}), 201
 
 # Run the app
