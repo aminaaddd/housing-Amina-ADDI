@@ -1,6 +1,0 @@
-flask
-pydantic==1.9.1
-psycopg2
-flask-migrate
-flask-sqlalchemy
-
