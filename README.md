@@ -13,20 +13,14 @@ Docker Compose installed.
 git clone https://github.com/aminaaddd/housing-Amina-ADDI.git
 ```
 ```bash
-cd housing-Amina-ADDI
+cd housing-Amina-ADDI/housing-api/venv
 ```
 ```bash
 docker-compose up --build
 ```
 
-## Pull images
-* https://hub.docker.com/repository/docker/amina444/postgres  # postgresql image
-* https://hub.docker.com/repository/docker/amina444/house     # api image
-
 ## Migration
-```bash
-cd app
-```
+### If it exists
 ```bash
 rm -rf migrations                                             # if migrations directory exists
 ```
@@ -37,7 +31,7 @@ docker exec -it venv-db-1 psql -U amina -d housing_db
    DROP TABLE IF EXISTS alembic_version;                     # if the table exists
 ```
 
-## To see the names of containers
+## See the names of containers
 ```bash
 docker ps
 ```
