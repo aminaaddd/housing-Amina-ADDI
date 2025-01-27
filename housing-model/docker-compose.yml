@@ -1,0 +1,10 @@
+
+services:
+  housing-model:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "6000:6000"
+    volumes:
+      - .:/app
