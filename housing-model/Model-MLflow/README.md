@@ -52,21 +52,7 @@ curl -X POST http://localhost:6000/predict \
   "median_income": 8.3252,
   "ocean_proximity": "NEAR BAY"
 }'
-```
-
-
-## Structure
-
-Model-MLflow/
-├── venv/                 # Virtual environment
-├── Dockerfile            # Dockerfile for the Flask app
-├── docker-compose.yml    # Docker Compose configuration
-├── requirements.txt      # Python dependencies
-├── housing.csv           # Dataset
-├── model.py              # Flask app and model code
-└── README.md             # Documentation
-
-          
+```    
 
 
 ### Documentation
