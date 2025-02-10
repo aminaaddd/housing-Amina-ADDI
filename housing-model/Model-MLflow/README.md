@@ -57,15 +57,15 @@ curl -X POST http://localhost:6000/predict \
 
 ## Structure
 housing-model/
-             ├── Model-MLflow/
-                              │
-                              ├── venv/
-                              ├── Dockerfile                 # Dockerfile for the Flask app
-                              ├── docker-compose.yml         # Docker Compose configuration
-                              ├── requirements.txt           # Python dependencies
-                              ├── housing.csv                # Dataset
-                              ├── model.py                   # Flask app and model code
-                              └── README.md                  
+├── Model-MLflow/
+    │   ├── venv/                 
+    ├── Dockerfile                # Dockerfile for the Flask app
+    ├── docker-compose.yml        # Docker Compose configuration
+    ├── requirements.txt          # Python dependencies
+    ├── housing.csv               # Dataset
+    ├── model.py                  # Flask app and model code
+    └── README.md                 
+          
 
 
 ### Documentation
