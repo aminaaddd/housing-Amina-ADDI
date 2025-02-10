@@ -11,11 +11,11 @@ import mlflow
 from sklearn.metrics import accuracy_score, mean_squared_error, mean_absolute_error, r2_score
 from mlflow.tracking import MlflowClient
 
-classification_problem = False
+classification_problem = False # currently False, so it's a regression
 
 df = pd.read_csv('housing.csv')
 
-# Data cleaning
+# Data cleaning process
 print(df.info())
 print(df.isnull().sum()) # see null values
 df = df.drop_duplicates()
@@ -67,13 +67,6 @@ y.fillna(y.mean(), inplace=True)
 # Split data into train and test
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-print("Vérification finale des NaN dans X_train:")
-print(X_train.isnull().sum().sum())  # Devrait afficher 0
-
-print("Vérification finale des NaN dans X_test:")
-print(X_test.isnull().sum().sum())  # Devrait afficher 0
-
-
 params = {
     "n_estimators": 100,
     "max_depth": 6,
@@ -90,7 +83,7 @@ model = model.fit(X_train, y_train)
 # Prediction
 y_pred = model.predict(X_test)
 
-# MSE
+# Evaluate the model using MSE, MAE, and R²
 mse = mean_squared_error(y_test, y_pred)
 mae = mean_absolute_error(y_test, y_pred)                                                                     
 r2 = r2_score(y_test, y_pred)
@@ -103,14 +96,12 @@ print(f"R²: {r2}")
 if classification_problem:
     print(f"Accuracy: {accuracy}")
 
-# MLflow
-
-# Configurer l'URI de tracking MLflow
+# ---------------- * MLflow * ------------------
 mlflow.set_tracking_uri("http://mlflow-tracking:5000")
 
-client = MlflowClient()
+client = MlflowClient() # Initialize the MLflow client
 
-# Démarrer une nouvelle exécution MLflow
+# New MLflow run
 run_name = "Random_Forest_Model"
 
 with mlflow.start_run(run_name=run_name) as run:
@@ -124,7 +115,7 @@ with mlflow.start_run(run_name=run_name) as run:
     if classification_problem:
         mlflow.log_metric("accuracy", accuracy)
 
-    # Enregistrer directement dans le registre MLflow
+    # Save the model in MLflow's model registry
     model_info = mlflow.sklearn.log_model(
         sk_model=model,
         artifact_path="model",
@@ -133,24 +124,24 @@ with mlflow.start_run(run_name=run_name) as run:
 
     print(f"Modèle enregistré : {model_info.model_uri}")
 
-# Vérifier les versions disponibles du modèle
+# version of the model
 versions = client.get_latest_versions("RandomForestHousing")
 
 if not versions:
-    print("Aucun modèle enregistré sous le nom 'RandomForestHousing'.")
+    print("No model found under the name 'RandomForestHousin.")
 else:
     for v in versions:
         print(f"Version: {v.version}, Status: {v.current_stage}")
 
-    # Prendre la dernière version enregistrée automatiquement
+    # the last version
     latest_version = versions[-1].version
-    print(f"Utilisation de la version {latest_version} du modèle.")
+    print(f"using version {latest_version} of the model.")
 
-    # Définir model_uri dynamiquement
+    # model_uri
     model_uri = f"models:/RandomForestHousing/{latest_version}"
-    print(f"Chargement du modèle depuis : {model_uri}")
+    print(f"Loading model from : {model_uri}")
 
-    # Charger le modèle avec la bonne version
+    # Load the model using MLflow
     model = mlflow.sklearn.load_model(model_uri)
 
 # API Flask
