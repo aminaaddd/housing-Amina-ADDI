@@ -1,0 +1,16 @@
+artifact_uri: mlflow-artifacts:/0/2f5d7c062d864aef8eaa9dddd2b5388a/artifacts
+deleted_time: 1737969788698
+end_time: 1737969391457
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: 2f5d7c062d864aef8eaa9dddd2b5388a
+run_name: Random_Forest
+run_uuid: 2f5d7c062d864aef8eaa9dddd2b5388a
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1737969391348
+status: 4
+tags: []
+user_id: amina

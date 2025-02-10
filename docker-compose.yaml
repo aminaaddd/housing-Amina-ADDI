@@ -1,0 +1,27 @@
+
+services:
+  mlflow-tracking:
+    image: ghcr.io/mlflow/mlflow
+    container_name: mlflow-tracking-1
+    ports:
+      - "5000:5000"  # Le port du serveur de suivi MLflow
+    environment:
+      - MLFLOW_TRACKING_URI=http://mlflow-tracking:5000
+      - MLFLOW_BACKEND_STORE_URI=sqlite:///mlflow.db
+      - MLFLOW_ARTIFACT_ROOT=/mlflow_artifacts
+    volumes:
+      - ./mlflow.db:/mlflow.db
+      - ./mlruns:/mlflow_artifacts
+    command: >
+      mlflow server --backend-store-uri sqlite:///mlflow.db --default-artifact-root /mlflow_artifacts --host 0.0.0.0 --port 5000
+    restart: always
+
+  housing-model:
+    build: .
+    container_name: housing-model-1
+    ports:
+      - "6000:6000"
+    depends_on:
+      - mlflow-tracking
+    environment:
+      - MLFLOW_TRACKING_URI=http://mlflow-tracking:5000
