@@ -1,0 +1,14 @@
+aliases: []
+creation_timestamp: 1738574837476
+current_stage: None
+description: ''
+last_updated_timestamp: 1738574837476
+name: RandomForestHousing
+run_id: 35fe3dae1a944ee3856bc6e678bac5c2
+run_link: ''
+source: mlflow-artifacts:/0/35fe3dae1a944ee3856bc6e678bac5c2/artifacts/model
+status: READY
+status_message: null
+storage_location: mlflow-artifacts:/0/35fe3dae1a944ee3856bc6e678bac5c2/artifacts/model
+user_id: null
+version: 7
