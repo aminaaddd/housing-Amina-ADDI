@@ -1,0 +1,15 @@
+artifact_uri: file:///home/amina/cloud2/housing-model/mlruns/727041827956041192/96b8beb2ba834d6197ba544cf1da19e2/artifacts
+end_time: 1740680280446
+entry_point_name: ''
+experiment_id: '727041827956041192'
+lifecycle_stage: active
+run_id: 96b8beb2ba834d6197ba544cf1da19e2
+run_name: defiant-owl-665
+run_uuid: 96b8beb2ba834d6197ba544cf1da19e2
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1740680277932
+status: 3
+tags: []
+user_id: amina

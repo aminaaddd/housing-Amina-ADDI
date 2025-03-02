@@ -1,0 +1,35 @@
+artifact_path: model
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.10.12
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.6.1
+is_signature_from_type_hint: false
+mlflow_version: 2.20.3
+model_size_bytes: 936
+model_uuid: d6bc9a0b10e94e919da8a0cce1b3a09a
+run_id: a3b8f864aa8b44d3a7b7e536368ee9fe
+saved_input_example_info:
+  artifact_path: input_example.json
+  serving_input_path: serving_input_example.json
+  type: ndarray
+signature:
+  inputs: '[{"type": "double", "name": "longitude", "required": true}, {"type": "double",
+    "name": "latitude", "required": true}, {"type": "double", "name": "housing_median_age",
+    "required": true}, {"type": "double", "name": "total_rooms", "required": true},
+    {"type": "double", "name": "total_bedrooms", "required": true}, {"type": "double",
+    "name": "population", "required": true}, {"type": "double", "name": "households",
+    "required": true}, {"type": "double", "name": "median_income", "required": true}]'
+  outputs: '[{"type": "tensor", "tensor-spec": {"dtype": "float64", "shape": [-1]}}]'
+  params: null
+type_hint_from_example: false
+utc_time_created: '2025-02-27 18:16:37.002006'

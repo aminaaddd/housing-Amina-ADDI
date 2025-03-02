@@ -1,0 +1,15 @@
+artifact_uri: file:///home/amina/cloud2/housing-model/mlruns/727041827956041192/63642bc1a03e40bd8378d3907c43362f/artifacts
+end_time: 1740680049538
+entry_point_name: ''
+experiment_id: '727041827956041192'
+lifecycle_stage: active
+run_id: 63642bc1a03e40bd8378d3907c43362f
+run_name: flawless-rat-628
+run_uuid: 63642bc1a03e40bd8378d3907c43362f
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1740680047415
+status: 3
+tags: []
+user_id: amina
