@@ -1,0 +1,84 @@
+version: "3.8"
+
+services:
+  housing-api:
+    build: ./housing-api
+    container_name: housing-api
+    ports:
+      - "5000:5000"
+    environment:
+      - DATABASE_URL=postgresql://postgres:password@db:5432/housing_db
+    depends_on:
+      - db
+
+  housing-model:
+    build: ./housing-model
+    container_name: housing-model
+    ports:
+      - "5001:5001"
+    volumes:
+      - ./housing-model/models:/app/models
+
+  housing-consumer:
+    build: ./housing-consumer
+    container_name: housing-consumer
+    depends_on:
+      - broker
+      - housing-api
+      - housing-model
+
+  db:
+    image: postgres:13
+    container_name: postgres-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: housing_db
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      
+  producer:
+    build: ./housing-consumer
+    container_name: producer
+    command: ["python", "producer.py"]
+    depends_on:
+      - broker
+
+
+  broker:
+    image: confluentinc/cp-kafka:latest
+    container_name: broker1
+    hostname: broker1
+    ports:
+      - "9092:9092"       # Port interne du broker
+      - "29092:29092"     # Port pour accès externe
+    environment:
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+      KAFKA_NODE_ID: 1
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://broker1:9092,PLAINTEXT_HOST://localhost:29092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+      KAFKA_PROCESS_ROLES: broker,controller
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@broker1:29093
+      KAFKA_LISTENERS: PLAINTEXT://broker1:9092,CONTROLLER://broker1:29093,PLAINTEXT_HOST://0.0.0.0:29092
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_LOG_DIRS: /tmp/kraft-combined-logs
+      CLUSTER_ID: "MkU3OEVBNTcwNTJENDM2Qk"
+    healthcheck:
+      test: ["CMD", "kafka-broker-api-versions", "--bootstrap-server", "broker1:9092"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      
+  topic-creator:
+    image: confluentinc/cp-kafka:latest
+    container_name: topic-creator
+    depends_on:
+      - broker
+    entrypoint: ["/bin/sh", "-c", "sleep 20 && kafka-topics --create --topic housing_topic --bootstrap-server broker1:9092 --replication-factor 1 --partitions 1"]
+    restart: "no"
+
+volumes:
+  pgdata:
